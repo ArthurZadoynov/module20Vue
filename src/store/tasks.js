@@ -42,6 +42,17 @@ const actions = {
     );
     commit("updateTask", response.data);
   },
+
+  async fetchTask({ commit }, id) {
+    try {
+      const response = await axios.get(
+        `https://a1043e7739a27305.mokky.dev/tasks/${id}`
+      );
+      commit("setTask", response.data);
+    } catch (error) {
+      console.error("Ошибка при получении задачи:", error);
+    }
+  },
 };
 
 const mutations = {
@@ -62,6 +73,14 @@ const mutations = {
   },
   setLoading(state, loading) {
     state.loading = loading;
+  },
+  setTask(state, task) {
+    const index = state.tasks.findIndex((t) => t.id === task.id);
+    if (index !== -1) {
+      state.tasks.splice(index, 1, task);
+    } else {
+      state.tasks.push(task);
+    }
   },
 };
 

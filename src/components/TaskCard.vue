@@ -1,12 +1,14 @@
 <template>
   <div class="task-card">
-    <h3>{{ task.title }}</h3>
-    <p>{{ task.description }}</p>
-    <p>
-      <strong>Приоритет:</strong> <span>{{ task.priority }}</span>
-    </p>
-    <p><strong>Срок выполнения:</strong> {{ task.dueDate }}</p>
-    <p><strong>Статус:</strong> {{ task.status }}</p>
+    <div @click="$emit('open-task', task.id)">
+      <h3>{{ task.title }}</h3>
+      <p>{{ task.description }}</p>
+      <p>
+        <strong>Приоритет:</strong> <span>{{ task.priority }}</span>
+      </p>
+      <p><strong>Срок выполнения:</strong> {{ task.dueDate }}</p>
+      <p><strong>Статус:</strong> {{ task.status }}</p>
+    </div>
     <button v-if="isEditing" @click="$emit('cancel-task', task)">
       Отмена редактирования
     </button>
@@ -38,7 +40,9 @@ export default {
   }
 
   p {
-    overflow-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 </style>

@@ -9,6 +9,7 @@
           @delete-task="deleteTask"
           @edit-task="editTask"
           @cancel-task="cancelEdit"
+          @open-task="goToTask"
         />
         <TaskForm
           v-if="isEditing && currentTask.id === task.id"
@@ -49,6 +50,7 @@ export default {
       return this.allTasks;
     },
   },
+
   methods: {
     async deleteTask(id) {
       try {
@@ -76,6 +78,11 @@ export default {
       for (const key in this.editingStates) {
         this.editingStates[key] = false;
       }
+    },
+
+    goToTask(id) {
+      console.log("Navigating to task with id:", id);
+      this.$router.push({ name: "TaskDetail", params: { id } });
     },
 
     showNotificationMessage(message) {

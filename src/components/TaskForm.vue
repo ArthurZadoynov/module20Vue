@@ -117,9 +117,9 @@ export default {
       } else if (this.task.description.length < 10) {
         this.errors.description =
           "Описание должно содержать минимум 10 символов.";
-      } else if (this.task.description.length > 100) {
+      } else if (this.task.description.length > 250) {
         this.errors.description =
-          "Описание должно содержать не более 100 символов.";
+          "Описание должно содержать не более 250 символов.";
       }
 
       if (!this.task.dueDate) {
